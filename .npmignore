@@ -1,0 +1,8 @@
+.vscode
+example
+src
+.nvmrc
+.prettierrc
+rollup.config.js
+test.js
+tsconfig.json

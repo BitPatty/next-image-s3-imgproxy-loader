@@ -1,0 +1,10 @@
+body {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.imgcontainer {
+  position: relative;
+  height: 200px;
+  width: 200px;
+}

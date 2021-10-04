@@ -1,0 +1,62 @@
+version: '3.7'
+
+networks:
+  next-image-s3-imgproxy-loader-network:
+    name: next-image-s3-imgproxy-loader-network
+    driver: bridge
+
+volumes:
+  next-image-s3-imgproxy-loader-mariadb-10.5.9__data:
+    driver: local
+  next-image-s3-imgproxy-loader-mariadb-10.5.9__config:
+    driver: local
+  next-image-s3-imgproxy-loader-minio-latest__data:
+    driver: local
+
+services:
+  application:
+    container_name: next-image-s3-imgproxy-loader
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VARIANT: 14
+        USER_UID: 1000
+        USER_GID: 1000
+    networks:
+      - next-image-s3-imgproxy-loader-network
+    volumes:
+      - ..:/workspace:cached
+      - ~/.ssh:/home/node/.ssh:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: sleep infinity
+    user: node
+    env_file:
+      - ./workspace.env
+    ports:
+      - 4000:4000
+      - 9000:9000
+      - 9001:9001
+
+  # Minio
+  next-image-s3-imgproxy-loader-minio-latest:
+    container_name: next-image-s3-imgproxy-loader-minio-latest
+    image: minio/minio:latest
+    network_mode: service:application
+    volumes:
+      - type: volume
+        source: next-image-s3-imgproxy-loader-minio-latest__data
+        target: /data
+        volume:
+          nocopy: false
+    command: server /data --console-address :9001
+    env_file:
+      - ./minio.env
+
+  # Imgproxy
+  next-image-s3-imgproxy-loader-imgproxy-latest:
+    container_name: next-image-s3-imgproxy-loader-imgproxy-latest
+    image: darthsim/imgproxy:latest
+    network_mode: service:application
+    env_file:
+      - ./imgproxy.env
