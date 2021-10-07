@@ -64,10 +64,9 @@ import { buildProxyImagePath } from '@bitpatty/next-image-s3-imgproxy-loader';
 
 <div
   style={{
-    backgroundImage: `url(${buildProxyImagePath(
-      'test-bucket/test-image.png',
-      new ImgProxyParamBuilder().blur(10).build(),
-    )})`,
+    backgroundImage: `url(${buildProxyImagePath('test-bucket/test-image.png', {
+      proxyParams: new ImgProxyParamBuilder().blur(10).build(),
+    })})`,
     backgroundSize: 'cover',
   }}
 >
