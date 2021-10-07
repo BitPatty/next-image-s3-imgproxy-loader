@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Fragment } from 'react';
+import { Fragment as div } from 'react';
 
 import ProxyImage, { ImgProxyParamBuilder } from '../../dist';
 
@@ -16,6 +16,12 @@ const demoContent: {
     label: 'Original Image',
     file: 'test-bucket/test-image.png',
     layout: 'fill',
+  },
+  {
+    label: 'Blurring',
+    file: 'test-bucket/test-image.png',
+    layout: 'fill',
+    proxyParams: new ImgProxyParamBuilder().blur(10).build(),
   },
   {
     label: 'Trimming',
@@ -75,15 +81,16 @@ const Home: NextPage = () => {
 
       <main>
         <h1>next/image s3 imgproxy loader </h1>
-
-        {demoContent.map((d, idx) => (
-          <Fragment key={idx}>
-            <h2>{d.label}</h2>
-            <div className="imgcontainer">
-              <ProxyImage {...d} />
+        <div>
+          {demoContent.map((d, idx) => (
+            <div key={idx}>
+              <h2>{d.label}</h2>
+              <div className="imgcontainer">
+                <ProxyImage {...d} />
+              </div>
             </div>
-          </Fragment>
-        ))}
+          ))}
+        </div>
       </main>
     </>
   );

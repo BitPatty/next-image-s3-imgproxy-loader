@@ -3,6 +3,14 @@ body {
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+main > div {
+  display: flex;
+}
+
+main > div > div {
+  margin-left: 20px;
+}
+
 .imgcontainer {
   position: relative;
   height: 200px;
