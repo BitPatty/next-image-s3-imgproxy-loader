@@ -9,6 +9,7 @@ jobs:
     if: github.repository_owner == 'bitpatty'
     name: Publish NPM package (GitHub Registry)
     runs-on: ubuntu-latest
+    environment: github-registry
     permissions:
       contents: read
       packages: write
