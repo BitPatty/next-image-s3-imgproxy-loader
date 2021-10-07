@@ -2,9 +2,9 @@ import * as React from 'react';
 import Image, { ImageLoaderProps, ImageProps } from 'next/image';
 
 import { createHmac } from 'crypto';
-import { ServerResponse, request as httpRequest } from 'http';
-import { request as httpsRequest } from 'https';
 import { ParsedUrlQuery } from 'node:querystring';
+import { request as httpsRequest } from 'https';
+import { ServerResponse, request as httpRequest } from 'http';
 
 import ImgProxyParamBuilder from './param-builder';
 
@@ -26,15 +26,17 @@ const imageOptimizer = (
     salt: string;
   },
 ) => {
-  const { src, params } = query;
+  const { src, params, format } = query;
   if (!src) {
     res.statusCode = 400;
     res.end();
     return;
   }
 
+  const fileFormat = format ? `@${format}` : '';
   const paramString = params ? `${params}/` : '';
-  const requestPath = `/${paramString}plain/s3://${src}@png`;
+  const requestPath = `/${paramString}plain/s3://${src}${fileFormat}`;
+
   const signature = signatureParams
     ? generateSignature(signatureParams.key, signatureParams.salt, requestPath)
     : '';
@@ -71,27 +73,38 @@ const imageOptimizer = (
   req.end();
 };
 
-const buildProxyImagePath = (file: string, proxyParams?: string): string => {
-  const urlParams = new URLSearchParams();
-  urlParams.append('src', file);
-  if (proxyParams) urlParams.append('params', proxyParams);
-  return `${IMGPROXY_ENDPOINT}?${urlParams.toString()}`;
-};
-
 type ProxyImageProps = {
   file: string;
+  format?: string;
   proxyParams?: string;
+};
+
+const buildProxyImagePath = (
+  file: string,
+  options?: Omit<ProxyImageProps, 'file'>,
+): string => {
+  const { proxyParams, format } = options ?? {};
+
+  const urlParams = new URLSearchParams();
+
+  urlParams.append('src', file);
+  if (proxyParams) urlParams.append('params', proxyParams);
+  if (format) urlParams.append('format', format);
+
+  return `${IMGPROXY_ENDPOINT}?${urlParams.toString()}`;
 };
 
 const ProxyImage = ({
   file,
   proxyParams,
+  format,
   ...props
 }: ProxyImageProps & Omit<ImageProps, 'src' | 'quality' | 'unoptimized'>) => {
   const imageLoader = ({ src, width }: ImageLoaderProps): string => {
     const urlParams = new URLSearchParams();
     urlParams.append('src', src);
     if (proxyParams) urlParams.append('params', proxyParams);
+    if (format) urlParams.append('format', format);
 
     // This doesn't actually do anything, it's just to suppress
     // this error https://nextjs.org/docs/messages/next-image-missing-loader-width

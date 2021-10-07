@@ -19,7 +19,6 @@ type ForwardType = Partial<ImgProxyParamBuilder> & {
 // for possible transformations
 
 class ImgProxyParamBuilder {
-  public readonly fileName: string;
   public readonly modifiers: string[] = [];
 
   constructor() {}

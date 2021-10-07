@@ -11,6 +11,7 @@ const demoContent: {
   file: string;
   proxyParams?: string;
   layout?: 'fill';
+  format?: string;
   width?: number;
   height?: number;
 }[] = [
@@ -18,6 +19,12 @@ const demoContent: {
     label: 'Original Image',
     file: 'test-bucket/test-image.png',
     layout: 'fill',
+  },
+  {
+    label: 'Changing filetype',
+    file: 'test-bucket/test-image.png',
+    layout: 'fill',
+    format: 'jpg',
   },
   {
     label: 'Blurring',
@@ -101,7 +108,9 @@ const Home: NextPage = () => {
               style={{
                 backgroundImage: `url(${buildProxyImagePath(
                   'test-bucket/test-image.png',
-                  new ImgProxyParamBuilder().blur(10).build(),
+                  {
+                    proxyParams: new ImgProxyParamBuilder().blur(10).build(),
+                  },
                 )})`,
                 backgroundSize: 'cover',
                 color: 'white',
