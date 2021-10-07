@@ -15,6 +15,9 @@ type ForwardType = Partial<ImgProxyParamBuilder> & {
   modifiers: string[];
 };
 
+// See https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md
+// for possible transformations
+
 class ImgProxyParamBuilder {
   public readonly fileName: string;
   public readonly modifiers: string[] = [];
@@ -42,7 +45,6 @@ class ImgProxyParamBuilder {
       };
     },
   ): Omit<T, 'resize'> {
-    // Signature: resize:%resizing_type:%width:%height:%enlarge:%extend
     const { type, width, height, enlarge, extend, gravity } = options ?? {};
     this.modifiers.push(
       options

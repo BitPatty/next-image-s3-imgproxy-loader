@@ -1,8 +1,10 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Fragment as div } from 'react';
 
-import ProxyImage, { ImgProxyParamBuilder } from '../../dist';
+import ProxyImage, {
+  ImgProxyParamBuilder,
+  buildProxyImagePath,
+} from '../../dist';
 
 const demoContent: {
   label: string;
@@ -90,6 +92,28 @@ const Home: NextPage = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div>
+          <div>
+            <h2>Background Image</h2>
+            <div
+              style={{
+                backgroundImage: `url(${buildProxyImagePath(
+                  'test-bucket/test-image.png',
+                  new ImgProxyParamBuilder().blur(10).build(),
+                )})`,
+                backgroundSize: 'cover',
+                color: 'white',
+                width: '200px',
+              }}
+            >
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Consectetur ipsam voluptates velit, perferendis alias maiores
+              atque rem accusantium culpa vero doloremque repellat porro fugiat
+              nam ad veniam accusamus aliquid molestias.
+            </div>
+          </div>
         </div>
       </main>
     </>

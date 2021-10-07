@@ -71,6 +71,13 @@ const imageOptimizer = (
   req.end();
 };
 
+const buildProxyImagePath = (file: string, proxyParams?: string): string => {
+  const urlParams = new URLSearchParams();
+  urlParams.append('src', file);
+  if (proxyParams) urlParams.append('params', proxyParams);
+  return `${IMGPROXY_ENDPOINT}?${urlParams.toString()}`;
+};
+
 type ProxyImageProps = {
   file: string;
   proxyParams?: string;
@@ -98,4 +105,9 @@ const ProxyImage = ({
 };
 
 export default ProxyImage;
-export { imageOptimizer, IMGPROXY_ENDPOINT, ImgProxyParamBuilder };
+export {
+  buildProxyImagePath,
+  imageOptimizer,
+  IMGPROXY_ENDPOINT,
+  ImgProxyParamBuilder,
+};
