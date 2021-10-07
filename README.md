@@ -4,6 +4,8 @@ This library is a layer on top of the the [next/image](https://nextjs.org/docs/a
 
 ## Sample Usage
 
+> You can find additional examples in the [demo project](https://github.com/BitPatty/next-image-s3-imgproxy-loader/blob/master/example/pages/index.tsx).
+
 ### Installation
 
 You can install the package via npm:
