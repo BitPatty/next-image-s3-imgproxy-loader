@@ -14,6 +14,7 @@ export default {
   ],
   plugins: [typescript()],
   external: [
+    'crypto',
     'react',
     'react-dom',
     'next',
