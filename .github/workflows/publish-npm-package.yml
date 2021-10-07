@@ -28,6 +28,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish-npmjs:
+    if: github.repository_owner == 'bitpatty'
     name: Publish NPM package (npmjs.org)
     runs-on: ubuntu-latest
     environment: npm-registry
