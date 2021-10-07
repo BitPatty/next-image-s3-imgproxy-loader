@@ -7,6 +7,8 @@ import { request as httpsRequest } from 'https';
 import { ServerResponse, request as httpRequest } from 'http';
 
 import ImgProxyParamBuilder from './param-builder';
+import GravityType from './enums/gravity-type.enum';
+import ResizeType from './enums/resize-type.enum';
 
 const IMGPROXY_ENDPOINT = '/_next/imgproxy';
 
@@ -119,8 +121,10 @@ const ProxyImage = ({
 
 export default ProxyImage;
 export {
+  IMGPROXY_ENDPOINT,
   buildProxyImagePath,
   imageOptimizer,
-  IMGPROXY_ENDPOINT,
   ImgProxyParamBuilder,
+  GravityType,
+  ResizeType,
 };

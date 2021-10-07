@@ -4,6 +4,8 @@ import Head from 'next/head';
 import ProxyImage, {
   ImgProxyParamBuilder,
   buildProxyImagePath,
+  ResizeType,
+  GravityType,
 } from '../../dist';
 
 const demoContent: {
@@ -65,12 +67,12 @@ const demoContent: {
     height: 100,
     proxyParams: new ImgProxyParamBuilder()
       .resize({
-        type: 'fit',
+        type: ResizeType.FILL,
         width: 100,
         height: 100,
         enlarge: true,
         gravity: {
-          type: 'no',
+          type: GravityType.NORTH,
           center: {
             x: 10,
             y: 10,

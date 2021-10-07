@@ -1,15 +1,5 @@
-type ResizeType = 'fit' | 'fill' | 'auto';
-
-type GravityType =
-  | 'no'
-  | 'so'
-  | 'ea'
-  | 'we'
-  | 'noea'
-  | 'nowe'
-  | 'soea'
-  | 'sowe'
-  | 'ce';
+import GravityType from './enums/gravity-type.enum';
+import ResizeType from './enums/resize-type.enum';
 
 type ForwardType = Partial<ImgProxyParamBuilder> & {
   modifiers: string[];
@@ -36,7 +26,7 @@ class ImgProxyParamBuilder {
       enlarge?: boolean;
       extend?: boolean;
       gravity?: {
-        type: Omit<GravityType, 'sm'>;
+        type: GravityType;
         center?: {
           x: number;
           y: number;
@@ -49,7 +39,7 @@ class ImgProxyParamBuilder {
       options
         ? [
             'resize',
-            type ?? 'fit',
+            type ?? ResizeType.FIT,
             width ?? 0,
             height ?? 0,
             !!enlarge,
