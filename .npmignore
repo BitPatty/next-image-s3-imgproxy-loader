@@ -1,8 +1,10 @@
-.vscode
-example
-src
+.github
 .nvmrc
 .prettierrc
+.vscode
+example
+package-lock.json
 rollup.config.js
-test.js
+scripts
+src
 tsconfig.json
