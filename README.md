@@ -4,6 +4,14 @@ This library is a layer on top of the the `next/image` component, which allows y
 
 ## Sample Usage
 
+### Installation
+
+You can install the package via npm:
+
+```sh
+npm install --save @bitpatty/next-image-s3-imgproxy-loader
+```
+
 ### Registering the endpoint
 
 The library proxies request through a next endpoint. To register the endpoint create a [custom server](https://nextjs.org/docs/advanced-features/custom-server) in your project and add the following lines:
