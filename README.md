@@ -1,6 +1,6 @@
 # `next/image` loader for imgproxy (S3)
 
-This library is a layer on top of the the `next/image` component, which allows you to load images from an [imgproxy](https://github.com/imgproxy/imgproxy) instance connected to an s3.
+This library is a layer on top of the the [next/image](https://nextjs.org/docs/api-reference/next/image) component, which allows you to load images from an [imgproxy](https://github.com/imgproxy/imgproxy) instance connected to an s3.
 
 ## Sample Usage
 
