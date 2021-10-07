@@ -15,13 +15,13 @@ const Home: NextPage = () => {
 
         <h2>Original Image</h2>
         <div className="imgcontainer">
-          <ProxyImage file="mybucket/buff.png" layout="fill" />
+          <ProxyImage file="test-bucket/test-image.png" layout="fill" />
         </div>
 
         <h2>Trimming</h2>
         <div className="imgcontainer">
           <ProxyImage
-            file="mybucket/buff.png"
+            file="test-bucket/test-image.png"
             layout="fill"
             proxyParams={new ImgProxyParamBuilder()
               .trim({
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
         <h2>Padding</h2>
         <div className="imgcontainer">
           <ProxyImage
-            file="mybucket/buff.png"
+            file="test-bucket/test-image.png"
             layout="fill"
             proxyParams={new ImgProxyParamBuilder().pad(50).build()}
           />
@@ -44,7 +44,7 @@ const Home: NextPage = () => {
         <h2>Padding with background</h2>
         <div className="imgcontainer">
           <ProxyImage
-            file="mybucket/buff.png"
+            file="test-bucket/test-image.png"
             layout="fill"
             proxyParams={new ImgProxyParamBuilder()
               .pad(50)
@@ -56,7 +56,7 @@ const Home: NextPage = () => {
         <h2>Resizing</h2>
         <div className="imgcontainer">
           <ProxyImage
-            file="mybucket/buff.png"
+            file="test-bucket/test-image.png"
             width={100}
             height={100}
             proxyParams={new ImgProxyParamBuilder()

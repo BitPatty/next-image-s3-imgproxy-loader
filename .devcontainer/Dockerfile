@@ -27,3 +27,9 @@ RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then groupmod --g
 # the daemon without sudo
 RUN groupadd docker
 RUN usermod -a -G docker node
+
+# Add minio CLI
+# See https://min.io/download#/linux
+RUN wget https://dl.min.io/client/mc/release/linux-amd64/mc \
+  && mv mc /usr/local/bin/minio-cli \
+  && chmod +x /usr/local/bin/minio-cli
