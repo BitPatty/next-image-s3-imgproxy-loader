@@ -7,6 +7,9 @@
   "scripts": {
     "build": "rimraf dist && rollup -c"
   },
+  "engines": {
+    "node": ">=15.7.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/BitPatty/next-image-s3-imgproxy-loader.git"
