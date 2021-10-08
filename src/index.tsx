@@ -116,7 +116,14 @@ const ProxyImage = ({
     return `${IMGPROXY_ENDPOINT}?${urlParams.toString()}`;
   };
 
-  return <Image src={file} loader={imageLoader} {...props} />;
+  return (
+    <Image
+      src={file}
+      loader={imageLoader}
+      {...(props.width == null && !props.layout ? { layout: 'fill' } : {})}
+      {...props}
+    />
+  );
 };
 
 export default ProxyImage;
