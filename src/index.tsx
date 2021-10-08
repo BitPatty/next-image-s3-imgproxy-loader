@@ -101,7 +101,8 @@ const ProxyImage = ({
   proxyParams,
   format,
   ...props
-}: ProxyImageProps & Omit<ImageProps, 'src' | 'quality' | 'unoptimized'>) => {
+}: ProxyImageProps &
+  Omit<ImageProps, 'src' | 'quality' | 'unoptimized' | 'loader'>) => {
   const imageLoader = ({ src, width }: ImageLoaderProps): string => {
     const urlParams = new URLSearchParams();
     urlParams.append('src', src);
