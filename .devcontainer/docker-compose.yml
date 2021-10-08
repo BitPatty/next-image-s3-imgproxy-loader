@@ -6,10 +6,6 @@ networks:
     driver: bridge
 
 volumes:
-  next-image-s3-imgproxy-loader-mariadb-10.5.9__data:
-    driver: local
-  next-image-s3-imgproxy-loader-mariadb-10.5.9__config:
-    driver: local
   next-image-s3-imgproxy-loader-minio-latest__data:
     driver: local
 
