@@ -1,6 +1,6 @@
 {
   "name": "@bitpatty/next-image-s3-imgproxy-loader",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "imgproxy S3 extension for next/image",
   "author": "Matteias Collet <matteias.collet@bluewin.ch>",
   "main": "dist/index.js",

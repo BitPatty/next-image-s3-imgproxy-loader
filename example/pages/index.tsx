@@ -81,6 +81,12 @@ const demoContent: {
       })
       .build(),
   },
+  {
+    label: 'Sharpen',
+    file: 'test-bucket/test-image.png',
+    layout: 'fill',
+    proxyParams: new ImgProxyParamBuilder().sharpen({ sigma: 1.5 }).build(),
+  },
 ];
 
 const Home: NextPage = () => {

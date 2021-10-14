@@ -93,6 +93,17 @@ class ImgProxyParamBuilder {
     return this;
   }
 
+  sharpen<T extends ForwardType>(
+    this: T,
+    options: {
+      sigma: number;
+    },
+  ): Omit<T, 'sharpen'> {
+    const { sigma } = options;
+    this.modifiers.push(['sh', sigma].join(':'));
+    return this;
+  }
+
   trim<T extends ForwardType>(
     this: T,
     options: {
