@@ -12,6 +12,14 @@ import ResizeType from './enums/resize-type.enum';
 
 const IMGPROXY_ENDPOINT = '/_next/imgproxy';
 
+const FORWARDED_HEADERS = [
+  'date',
+  'expires',
+  'content-type',
+  'content-length',
+  'cache-control',
+];
+
 const generateSignature = (key: string, salt: string, buff: string): string => {
   const hmac = createHmac('sha256', Buffer.from(key, 'hex'));
   hmac.update(Buffer.from(salt, 'hex'));
@@ -55,8 +63,9 @@ const imageOptimizer = (
       method: 'GET',
     },
     (r) => {
-      if (r.headers['content-type'])
-        res.setHeader('Content-Type', r.headers['content-type']);
+      FORWARDED_HEADERS.forEach((h) => {
+        if (r.headers[h]) res.setHeader(h, r.headers[h] as string);
+      });
 
       if (r.statusCode) res.statusCode = r.statusCode;
 
