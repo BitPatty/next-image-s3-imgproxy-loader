@@ -35,6 +35,35 @@ const demoContent: {
     proxyParams: new ImgProxyParamBuilder().blur(10).build(),
   },
   {
+    label: 'Cropping',
+    file: 'test-bucket/test-image.png',
+    layout: 'fill',
+    proxyParams: new ImgProxyParamBuilder()
+      .crop({
+        width: 30,
+        height: 30,
+      })
+      .build(),
+  },
+  {
+    label: 'Cropping 2',
+    file: 'test-bucket/test-image.png',
+    layout: 'fill',
+    proxyParams: new ImgProxyParamBuilder()
+      .crop({
+        width: 30,
+        height: 30,
+        gravity: {
+          type: GravityType.NORTHEAST,
+          center: {
+            x: 10,
+            y: 10,
+          },
+        },
+      })
+      .build(),
+  },
+  {
     label: 'Trimming',
     file: 'test-bucket/test-image.png',
     layout: 'fill',

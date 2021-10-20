@@ -17,6 +17,36 @@ class ImgProxyParamBuilder {
     return this.modifiers.join('/');
   }
 
+  crop<T extends ForwardType>(
+    this: T,
+    options: {
+      width: number;
+      height: number;
+      gravity?: {
+        type: GravityType;
+        center?: {
+          x: number;
+          y: number;
+        };
+      };
+    },
+  ): Omit<T, 'crop'> {
+    const { width, height, gravity } = options;
+
+    this.modifiers.push(
+      [
+        'crop',
+        width,
+        height,
+        ...[gravity?.type, gravity?.center?.x, gravity?.center?.y].filter(
+          (v) => !!v,
+        ),
+      ].join(':'),
+    );
+
+    return this;
+  }
+
   resize<T extends ForwardType>(
     this: T,
     options?: {
