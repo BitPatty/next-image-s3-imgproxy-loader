@@ -39,7 +39,7 @@ class ImgProxyParamBuilder {
         width,
         height,
         ...[gravity?.type, gravity?.center?.x, gravity?.center?.y].filter(
-          (v) => !!v,
+          (v) => v != null,
         ),
       ].join(':'),
     );
@@ -75,7 +75,7 @@ class ImgProxyParamBuilder {
             !!enlarge,
             !!extend,
             ...[gravity?.type, gravity?.center?.x, gravity?.center?.y].filter(
-              (v) => !!v,
+              (v) => v != null,
             ),
           ].join(':')
         : ['resize', type ?? 'fit'].join(':'),
