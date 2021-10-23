@@ -11,6 +11,7 @@ import GravityType from './enums/gravity-type.enum';
 import ResizeType from './enums/resize-type.enum';
 
 const IMGPROXY_ENDPOINT = '/_next/imgproxy';
+const SRC_REGEX = /^[^/.]+\/.+[^/]$/;
 
 const FORWARDED_HEADERS = [
   'date',
@@ -31,13 +32,27 @@ const imageOptimizer = (
   imgproxyBaseUrl: URL,
   query: ParsedUrlQuery,
   res: ServerResponse,
-  signatureParams?: {
-    key: string;
-    salt: string;
+  options?: {
+    signature?: {
+      key: string;
+      salt: string;
+    };
+    bucketWhitelist?: string[];
   },
 ) => {
   const { src, params, format } = query;
-  if (!src) {
+  const { signature, bucketWhitelist } = options ?? {};
+
+  // If the source is not set of fails the
+  // regex check throw a 400
+  if (!src || Array.isArray(src) || !SRC_REGEX.test(src)) {
+    res.statusCode = 400;
+    res.end();
+    return;
+  }
+
+  // If the bucket whitelist is set throw a 400
+  if (bucketWhitelist && !bucketWhitelist.includes(src.split('/')[0])) {
     res.statusCode = 400;
     res.end();
     return;
@@ -47,8 +62,8 @@ const imageOptimizer = (
   const paramString = params ? `${params}/` : '';
   const requestPath = `/${paramString}plain/s3://${src}${fileFormat}`;
 
-  const signature = signatureParams
-    ? generateSignature(signatureParams.key, signatureParams.salt, requestPath)
+  const urlSignature = signature
+    ? generateSignature(signature.key, signature.salt, requestPath)
     : '';
 
   const reqMethod = imgproxyBaseUrl.protocol.startsWith('https')
@@ -59,7 +74,7 @@ const imageOptimizer = (
     {
       hostname: imgproxyBaseUrl.hostname,
       ...(imgproxyBaseUrl.port ? { port: imgproxyBaseUrl.port } : {}),
-      path: `/${signature}${requestPath}`,
+      path: `/${urlSignature}${requestPath}`,
       method: 'GET',
     },
     (r) => {

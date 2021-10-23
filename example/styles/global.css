@@ -5,6 +5,7 @@ body {
 
 main > div {
   display: flex;
+  flex-wrap: wrap;
 }
 
 main > div > div {

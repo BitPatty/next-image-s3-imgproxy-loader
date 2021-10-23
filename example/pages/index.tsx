@@ -20,24 +20,23 @@ const demoContent: {
   {
     label: 'Original Image',
     file: 'test-bucket/test-image.png',
-    layout: 'fill',
   },
   {
     label: 'Changing filetype',
     file: 'test-bucket/test-image.png',
-    layout: 'fill',
+
     format: 'jpg',
   },
   {
     label: 'Blurring',
     file: 'test-bucket/test-image.png',
-    layout: 'fill',
+
     proxyParams: new ImgProxyParamBuilder().blur(10).build(),
   },
   {
     label: 'Cropping',
     file: 'test-bucket/test-image.png',
-    layout: 'fill',
+
     proxyParams: new ImgProxyParamBuilder()
       .crop({
         width: 30,
@@ -48,7 +47,7 @@ const demoContent: {
   {
     label: 'Cropping 2',
     file: 'test-bucket/test-image.png',
-    layout: 'fill',
+
     proxyParams: new ImgProxyParamBuilder()
       .crop({
         width: 30,
@@ -66,7 +65,7 @@ const demoContent: {
   {
     label: 'Trimming',
     file: 'test-bucket/test-image.png',
-    layout: 'fill',
+
     proxyParams: new ImgProxyParamBuilder()
       .trim({
         threshold: 0,
@@ -77,13 +76,13 @@ const demoContent: {
   {
     label: 'Trimming',
     file: 'test-bucket/test-image.png',
-    layout: 'fill',
+
     proxyParams: new ImgProxyParamBuilder().pad(50).build(),
   },
   {
     label: 'Padding with background',
     file: 'test-bucket/test-image.png',
-    layout: 'fill',
+
     proxyParams: new ImgProxyParamBuilder()
       .pad(50)
       .setBackground('ff0000')
@@ -113,7 +112,6 @@ const demoContent: {
   {
     label: 'Sharpen',
     file: 'test-bucket/test-image.png',
-    layout: 'fill',
     proxyParams: new ImgProxyParamBuilder().sharpen({ sigma: 1.5 }).build(),
   },
 ];

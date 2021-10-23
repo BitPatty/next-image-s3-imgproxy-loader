@@ -36,11 +36,19 @@ app.prepare().then(() => {
         new URL('<url to your imgproxy instance>'),
         query,
         res,
-        // Optional, only provide this if you use
-        // imgproxy signatures
+        // (Optional) Additional configuration options
         {
-          key: '<imgproxy secret>',
-          salt: '<imgproxy salt>',
+          // (Optional) If your imgproxy uses signatures, specify
+          // the key and salt here
+          signature: {
+            // (Required) The IMGPROXY_KEY (hex encoded)
+            key: '<imgproxy secret>',
+            // (Required) The IMGPROXY_SALT (hex encoded)
+            salt: '<imgproxy salt>',
+          },
+          // (Optional) If you wanna restrict access to specific
+          // buckets add an array of valid bucket names
+          bucketWhitelist: ['<my-bucket>'],
         },
       );
     } else {
@@ -64,10 +72,11 @@ import ProxyImage, {
 
 <ProxyImage
   file="mybucket/myfile.png"
-  layout="fill"
   proxyParams={new ImgProxyParamBuilder().rotate(180).blur(10).build()}
 />;
 ```
+
+> Note: The layout prop is automatically set to 'fill' if no width is set
 
 ## Using the raw path
 
@@ -76,11 +85,25 @@ In case using the component is not an option, you can instead use the image path
 ```tsx
 import { buildProxyImagePath } from '@bitpatty/next-image-s3-imgproxy-loader';
 
+const imagePath = buildProxyImagePath('test-bucket/test-image.png', {
+  proxyParams: new ImgProxyParamBuilder().blur(10).build(),
+});
+
+<img src={imagePath} />;
+```
+
+or as background image
+
+```tsx
+import { buildProxyImagePath } from '@bitpatty/next-image-s3-imgproxy-loader';
+
+const imagePath = buildProxyImagePath('test-bucket/test-image.png', {
+  proxyParams: new ImgProxyParamBuilder().blur(10).build(),
+});
+
 <div
   style={{
-    backgroundImage: `url(${buildProxyImagePath('test-bucket/test-image.png', {
-      proxyParams: new ImgProxyParamBuilder().blur(10).build(),
-    })})`,
+    backgroundImage: `url(${imagePath})`,
     backgroundSize: 'cover',
   }}
 >
