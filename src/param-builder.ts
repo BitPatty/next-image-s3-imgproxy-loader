@@ -193,6 +193,11 @@ class ImgProxyParamBuilder {
     this.modifiers.push(['blur', sigma].join(':'));
     return this;
   }
+
+  format<T extends ForwardType>(this: T, format: string): Omit<T, 'format'> {
+    this.modifiers.push(['format', format].join(':'));
+    return this;
+  }
 }
 
 export default ImgProxyParamBuilder;

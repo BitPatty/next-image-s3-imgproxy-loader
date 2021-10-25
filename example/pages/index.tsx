@@ -13,7 +13,6 @@ const demoContent: {
   file: string;
   proxyParams?: string;
   layout?: 'fill';
-  format?: string;
   width?: number;
   height?: number;
 }[] = [
@@ -24,8 +23,6 @@ const demoContent: {
   {
     label: 'Changing filetype',
     file: 'test-bucket/test-image.png',
-
-    format: 'jpg',
   },
   {
     label: 'Blurring',
@@ -113,6 +110,11 @@ const demoContent: {
     label: 'Sharpen',
     file: 'test-bucket/test-image.png',
     proxyParams: new ImgProxyParamBuilder().sharpen({ sigma: 1.5 }).build(),
+  },
+  {
+    label: 'PNG to JPG',
+    file: 'test-bucket/test-image.png',
+    proxyParams: new ImgProxyParamBuilder().format('jpg').build(),
   },
 ];
 

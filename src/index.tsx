@@ -19,6 +19,7 @@ const FORWARDED_HEADERS = [
   'content-type',
   'content-length',
   'cache-control',
+  'content-disposition',
 ];
 
 type ImageOptimizerOptions = {
@@ -44,7 +45,7 @@ const imageOptimizer = (
   res: ServerResponse,
   options?: ImageOptimizerOptions,
 ) => {
-  const { src, params, format } = query;
+  const { src, params } = query;
   const { authToken, bucketWhitelist, forwardedHeaders, signature } =
     options ?? {};
 
@@ -63,9 +64,8 @@ const imageOptimizer = (
     return;
   }
 
-  const fileFormat = format ? `@${format}` : '';
   const paramString = params ? `${params}/` : '';
-  const requestPath = `/${paramString}plain/s3://${src}${fileFormat}`;
+  const requestPath = `/${paramString}plain/s3://${src}`;
 
   const urlSignature = signature
     ? generateSignature(signature.key, signature.salt, requestPath)
@@ -109,7 +109,6 @@ const imageOptimizer = (
 
 type ProxyImageProps = {
   file: string;
-  format?: string;
   proxyParams?: string;
   endpoint?: string;
 };
@@ -118,21 +117,19 @@ const buildProxyImagePath = (
   file: string,
   options?: Omit<ProxyImageProps, 'file'>,
 ): string => {
-  const { proxyParams, format } = options ?? {};
+  const { proxyParams, endpoint } = options ?? {};
 
   const urlParams = new URLSearchParams();
 
   urlParams.append('src', file);
   if (proxyParams) urlParams.append('params', proxyParams);
-  if (format) urlParams.append('format', format);
 
-  return `${options?.endpoint ?? IMGPROXY_ENDPOINT}?${urlParams.toString()}`;
+  return `${endpoint ?? IMGPROXY_ENDPOINT}?${urlParams.toString()}`;
 };
 
 const ProxyImage = ({
   file,
   proxyParams,
-  format,
   endpoint,
   ...props
 }: ProxyImageProps &
@@ -141,7 +138,6 @@ const ProxyImage = ({
     const urlParams = new URLSearchParams();
     urlParams.append('src', src);
     if (proxyParams) urlParams.append('params', proxyParams);
-    if (format) urlParams.append('format', format);
 
     // This doesn't actually do anything, it's just to suppress
     // this error https://nextjs.org/docs/messages/next-image-missing-loader-width
