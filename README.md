@@ -46,9 +46,15 @@ app.prepare().then(() => {
             // (Required) The IMGPROXY_SALT (hex encoded)
             salt: '<imgproxy salt>',
           },
+          // (Optional) If your imgproxy instance uses
+          // the IMGPROXY_SECRET, specify the token here
+          authToken: '<my-token>'
           // (Optional) If you wanna restrict access to specific
           // buckets add an array of valid bucket names
           bucketWhitelist: ['<my-bucket>'],
+          // (Optional) A list of imgproxy headers that should be
+          // forwarded through the imgproxy endpoint
+          forwardedHeaders: ['<my-header>'],
         },
       );
     } else {
@@ -109,4 +115,27 @@ const imagePath = buildProxyImagePath('test-bucket/test-image.png', {
 >
   {/* Content */}
 </div>;
+```
+
+## Overriding the endpoint
+
+You can override the default endpoint address or use an absolute address in the component instead.
+
+```js
+// server.js
+createServer((req, res) => {
+  // ...
+  if (pathname === '/my-endpoint') {
+    // ...
+  }
+}
+```
+
+```tsx
+<ProxyImage file="mybucket/myfile.png" endpoint="/my-endpoint" />;
+
+// Or
+buildProxyImagePath('test-bucket/test-image.png', {
+  endpoint: '/my-endpoint',
+});
 ```

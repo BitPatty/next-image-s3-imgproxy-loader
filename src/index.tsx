@@ -21,6 +21,16 @@ const FORWARDED_HEADERS = [
   'cache-control',
 ];
 
+type ImageOptimizerOptions = {
+  signature?: {
+    key: string;
+    salt: string;
+  };
+  authToken?: string;
+  bucketWhitelist?: string[];
+  forwardedHeaders?: string[];
+};
+
 const generateSignature = (key: string, salt: string, buff: string): string => {
   const hmac = createHmac('sha256', Buffer.from(key, 'hex'));
   hmac.update(Buffer.from(salt, 'hex'));
@@ -32,16 +42,11 @@ const imageOptimizer = (
   imgproxyBaseUrl: URL,
   query: ParsedUrlQuery,
   res: ServerResponse,
-  options?: {
-    signature?: {
-      key: string;
-      salt: string;
-    };
-    bucketWhitelist?: string[];
-  },
+  options?: ImageOptimizerOptions,
 ) => {
   const { src, params, format } = query;
-  const { signature, bucketWhitelist } = options ?? {};
+  const { authToken, bucketWhitelist, forwardedHeaders, signature } =
+    options ?? {};
 
   // If the source is not set of fails the
   // regex check throw a 400
@@ -76,9 +81,12 @@ const imageOptimizer = (
       ...(imgproxyBaseUrl.port ? { port: imgproxyBaseUrl.port } : {}),
       path: `/${urlSignature}${requestPath}`,
       method: 'GET',
+      headers: {
+        ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+      },
     },
     (r) => {
-      FORWARDED_HEADERS.forEach((h) => {
+      (forwardedHeaders ?? FORWARDED_HEADERS).forEach((h) => {
         if (r.headers[h]) res.setHeader(h, r.headers[h] as string);
       });
 
@@ -103,6 +111,7 @@ type ProxyImageProps = {
   file: string;
   format?: string;
   proxyParams?: string;
+  endpoint?: string;
 };
 
 const buildProxyImagePath = (
@@ -117,13 +126,14 @@ const buildProxyImagePath = (
   if (proxyParams) urlParams.append('params', proxyParams);
   if (format) urlParams.append('format', format);
 
-  return `${IMGPROXY_ENDPOINT}?${urlParams.toString()}`;
+  return `${options?.endpoint ?? IMGPROXY_ENDPOINT}?${urlParams.toString()}`;
 };
 
 const ProxyImage = ({
   file,
   proxyParams,
   format,
+  endpoint,
   ...props
 }: ProxyImageProps &
   Omit<ImageProps, 'src' | 'quality' | 'unoptimized' | 'loader'>) => {
@@ -138,7 +148,7 @@ const ProxyImage = ({
     if (width) urlParams.append('width', width.toString());
 
     // will return /_next/imgproxy?src=...&params=...&width=...
-    return `${IMGPROXY_ENDPOINT}?${urlParams.toString()}`;
+    return `${endpoint ?? IMGPROXY_ENDPOINT}?${urlParams.toString()}`;
   };
 
   return (
