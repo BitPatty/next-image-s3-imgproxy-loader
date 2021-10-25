@@ -142,15 +142,33 @@ buildProxyImagePath('test-bucket/test-image.png', {
 
 ## Available Transformations
 
-The following transformations have been implemented.
+The following transformations have been implemented (Note that it is not planned to implement PRO transformations).
 
-- [`blur()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#blur)
-- [`crop()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#crop)
-- [`format()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#format)
-- [`pad()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#padding)
-- [`resize()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#resize)
-- [`rotate()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#rotate)
-- [`setBackground()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#background)
-- [`setDpr()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#dpr)
-- [`sharpen()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#sharpen)
-- [`trim()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#trim)
+| Transformation                                                                                                                    | Supported                |
+| --------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| [`Signature`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#signature)                     | :white_check_mark:       |
+| [`Blur`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#blur)                               | :white_check_mark:       |
+| [`Resize`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#resize)                           | :white_check_mark:       |
+| [`Size`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#size)                               | :wavy_dash: (via Resize) |
+| [`Width`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#width)                             | :wavy_dash: (via Resize) |
+| [`Height`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#height)                           | :wavy_dash: (via Resize) |
+| [`Dpr`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#dpr)                                 | :white_check_mark:       |
+| [`Enlarge`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#enlarge)                         | :wavy_dash: (via Resize) |
+| [`Extend`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#extend)                           | :wavy_dash: (via Resize) |
+| [`Gravity`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#gravity)                         | :wavy_dash: (via Resize) |
+| [`Crop`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#crop)                               | :white_check_mark:       |
+| [`Padding`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#padding)                         | :white_check_mark:       |
+| [`Trim`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#trim)                               | :white_check_mark:       |
+| [`Rotate`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#rotate)                           | :white_check_mark:       |
+| [`Quality`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#quality)                         | :white_check_mark:       |
+| [`Max Bytes`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#max-bytes)                     | :white_check_mark:       |
+| [`Background`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#background)                   | :white_check_mark:       |
+| [`Sharpen`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#sharpen)                         | :white_check_mark:       |
+| [`Watermark`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#watermark)                     | :x:                      |
+| [`Preset`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#preset)                           | :x:                      |
+| [`Cache Buster`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#cache-buster)               | :x:                      |
+| [`Strip Metadata`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#strip-metadata)           | :x:                      |
+| [`Strip Color Profile`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#strip-color-profile) | :x:                      |
+| [`Auto Rotate`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#auto-rotate)                 | :x:                      |
+| [`Filename`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#filename)                       | :x:                      |
+| [`Format`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#format)                           | :white_check_mark:       |
