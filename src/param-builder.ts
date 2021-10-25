@@ -1,5 +1,6 @@
 import GravityType from './enums/gravity-type.enum';
 import ResizeType from './enums/resize-type.enum';
+import WatermarkPosition from './enums/watermark-position.enum';
 
 type ForwardType = Partial<ImgProxyParamBuilder> & {
   modifiers: string[];
@@ -189,6 +190,33 @@ class ImgProxyParamBuilder {
     return this;
   }
 
+  addWatermark<T extends ForwardType>(
+    this: T,
+    options: {
+      opacity: number;
+      position?: WatermarkPosition;
+      offset?: {
+        x: number;
+        y: number;
+      };
+      scale?: number;
+    },
+  ): Omit<T, 'addWatermark'> {
+    const { opacity, position, offset, scale } = options;
+
+    this.modifiers.push(
+      [
+        'wm',
+        opacity,
+        position ?? WatermarkPosition.CENTER,
+        offset?.x ?? 0,
+        offset?.y ?? 0,
+        scale ?? 0,
+      ].join(':'),
+    );
+    return this;
+  }
+
   blur<T extends ForwardType>(this: T, sigma: number): Omit<T, 'blur'> {
     this.modifiers.push(['blur', sigma].join(':'));
     return this;
@@ -196,6 +224,49 @@ class ImgProxyParamBuilder {
 
   format<T extends ForwardType>(this: T, format: string): Omit<T, 'format'> {
     this.modifiers.push(['format', format].join(':'));
+    return this;
+  }
+
+  useCacheBuster<T extends ForwardType>(
+    this: T,
+    buster: string,
+  ): Omit<T, 'useCacheBuster'> {
+    this.modifiers.push(['cb', buster].join(':'));
+    return this;
+  }
+
+  stripMetadata<T extends ForwardType>(this: T): Omit<T, 'stripMetadata'> {
+    this.modifiers.push(['sm', 1].join(':'));
+    return this;
+  }
+
+  stripColorProfile<T extends ForwardType>(
+    this: T,
+  ): Omit<T, 'stripColorProfile'> {
+    this.modifiers.push(['scp', 1].join(':'));
+    return this;
+  }
+
+  autoRotate<T extends ForwardType>(this: T): Omit<T, 'autoRotate'> {
+    this.modifiers.push(['ar', 1].join(':'));
+    return this;
+  }
+
+  setFilename<T extends ForwardType>(
+    this: T,
+    fileName: string,
+  ): Omit<T, 'setFilename'> {
+    this.modifiers.push(['fn', fileName].join(':'));
+    return this;
+  }
+
+  usePreset<T extends ForwardType>(
+    this: T,
+    presets: string | string[],
+  ): Omit<T, 'usePreset'> {
+    this.modifiers.push(
+      ['preset', ...(Array.isArray(presets) ? presets : [presets])].join(':'),
+    );
     return this;
   }
 }
