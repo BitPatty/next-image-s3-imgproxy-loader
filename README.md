@@ -104,7 +104,7 @@ or as background image
 import { buildProxyImagePath } from '@bitpatty/next-image-s3-imgproxy-loader';
 
 const imagePath = buildProxyImagePath('test-bucket/test-image.png', {
-  proxyParams: new ImgProxyParamBuilder().blur(10).build(),
+  proxyParams: new ImgProxyParamBuilder().blur(10).format('jpg').build(),
 });
 
 <div
@@ -139,3 +139,18 @@ buildProxyImagePath('test-bucket/test-image.png', {
   endpoint: '/my-endpoint',
 });
 ```
+
+## Available Transformations
+
+The following transformations have been implemented.
+
+- [`blur()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#blur)
+- [`crop()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#crop)
+- [`format()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#format)
+- [`pad()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#padding)
+- [`resize()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#resize)
+- [`rotate()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#rotate)
+- [`setBackground()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#background)
+- [`setDpr()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#dpr)
+- [`sharpen()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#sharpen)
+- [`trim()`](https://github.com/imgproxy/imgproxy/blob/master/docs/generating_the_url_advanced.md#trim)
