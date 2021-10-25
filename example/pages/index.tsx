@@ -114,7 +114,12 @@ const demoContent: {
   {
     label: 'PNG to JPG',
     file: 'test-bucket/test-image.png',
-    proxyParams: new ImgProxyParamBuilder().format('jpg').build(),
+    proxyParams: new ImgProxyParamBuilder().format('png').build(),
+  },
+  {
+    label: 'SVG to PNG',
+    file: 'test-bucket/test-image.svg',
+    proxyParams: new ImgProxyParamBuilder().format('png').build(),
   },
 ];
 
