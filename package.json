@@ -37,5 +37,8 @@
   },
   "peerDependencies": {
     "next": "^11.0.0"
+  },
+  "dependencies": {
+    "@bitpatty/imgproxy-url-builder": "^0.1.0"
   }
 }

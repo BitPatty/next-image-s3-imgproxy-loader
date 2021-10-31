@@ -1,17 +1,16 @@
 import * as React from 'react';
 import Image, { ImageLoaderProps, ImageProps } from 'next/image';
 
-import { createHmac } from 'crypto';
 import { ParsedUrlQuery } from 'node:querystring';
 import { request as httpsRequest } from 'https';
 import { ServerResponse, request as httpRequest } from 'http';
 
-import ImgProxyParamBuilder from './param-builder';
-import GravityType from './enums/gravity-type.enum';
-import ResizeType from './enums/resize-type.enum';
+import pb from '@bitpatty/imgproxy-url-builder';
 
 const IMGPROXY_ENDPOINT = '/_next/imgproxy';
+
 const SRC_REGEX = /^[^/.]+\/.+[^/]$/;
+
 const FORWARDED_HEADERS = [
   'date',
   'expires',
@@ -20,20 +19,6 @@ const FORWARDED_HEADERS = [
   'cache-control',
   'content-disposition',
 ];
-
-/**
- * Generates the signature for the specified uery
- * @param key The signature key
- * @param salt The signature salt$
- * @param buff The full request path
- * @returns The imgproxy signature
- */
-const generateSignature = (key: string, salt: string, buff: string): string => {
-  const hmac = createHmac('sha256', Buffer.from(key, 'hex'));
-  hmac.update(Buffer.from(salt, 'hex'));
-  hmac.update(buff);
-  return hmac.digest().toString('base64url');
-};
 
 /**
  * Builds the final reuest path to retrieve
@@ -54,14 +39,13 @@ const buildRequestPath = (
 ): string => {
   const { imgproxyParams, signature } = options ?? {};
 
-  const paramString = imgproxyParams ? `${imgproxyParams}/` : '';
-  const requestPath = `/${paramString}plain/s3://${src}`;
+  const paramBuilder = pb();
+  if (imgproxyParams) paramBuilder.modifiers.push(imgproxyParams);
 
-  const urlSignature = signature
-    ? generateSignature(signature.key, signature.salt, requestPath)
-    : '';
-
-  return `/${urlSignature}${requestPath}`;
+  return paramBuilder.build({
+    path: `s3://${src}`,
+    signature,
+  });
 };
 
 type ImageOptimizerOptions = {
@@ -159,7 +143,6 @@ const buildProxyImagePath = (
   options?: Omit<ProxyImageProps, 'file'>,
 ): string => {
   const { proxyParams, endpoint } = options ?? {};
-
   const urlParams = new URLSearchParams();
 
   urlParams.append('src', file);
@@ -199,12 +182,4 @@ const ProxyImage = ({
 };
 
 export default ProxyImage;
-export {
-  IMGPROXY_ENDPOINT,
-  buildProxyImagePath,
-  handle,
-  generateSignature,
-  ImgProxyParamBuilder,
-  GravityType,
-  ResizeType,
-};
+export { IMGPROXY_ENDPOINT, buildProxyImagePath, handle };

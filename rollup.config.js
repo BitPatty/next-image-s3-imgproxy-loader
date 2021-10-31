@@ -22,5 +22,6 @@ export default {
     'http',
     'https',
     'node:querystring',
+    '@bitpatty/imgproxy-url-builder',
   ],
 };

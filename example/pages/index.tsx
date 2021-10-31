@@ -1,12 +1,8 @@
+import pb, { GravityType, ResizeType } from '@bitpatty/imgproxy-url-builder';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
-import ProxyImage, {
-  ImgProxyParamBuilder,
-  buildProxyImagePath,
-  ResizeType,
-  GravityType,
-} from '../../dist';
+import ProxyImage, { buildProxyImagePath } from '../../dist';
 
 const demoContent: {
   label: string;
@@ -28,13 +24,13 @@ const demoContent: {
     label: 'Blurring',
     file: 'test-bucket/test-image.png',
 
-    proxyParams: new ImgProxyParamBuilder().blur(10).build(),
+    proxyParams: pb().blur(10).build(),
   },
   {
     label: 'Cropping',
     file: 'test-bucket/test-image.png',
 
-    proxyParams: new ImgProxyParamBuilder()
+    proxyParams: pb()
       .crop({
         width: 30,
         height: 30,
@@ -45,13 +41,13 @@ const demoContent: {
     label: 'Cropping 2',
     file: 'test-bucket/test-image.png',
 
-    proxyParams: new ImgProxyParamBuilder()
+    proxyParams: pb()
       .crop({
         width: 30,
         height: 30,
         gravity: {
           type: GravityType.NORTHEAST,
-          center: {
+          offset: {
             x: 10,
             y: 10,
           },
@@ -63,7 +59,7 @@ const demoContent: {
     label: 'Trimming',
     file: 'test-bucket/test-image.png',
 
-    proxyParams: new ImgProxyParamBuilder()
+    proxyParams: pb()
       .trim({
         threshold: 0,
         color: '000000',
@@ -74,52 +70,42 @@ const demoContent: {
     label: 'Trimming',
     file: 'test-bucket/test-image.png',
 
-    proxyParams: new ImgProxyParamBuilder().pad(50).build(),
+    proxyParams: pb().pad({ top: 50 }).build(),
   },
   {
     label: 'Padding with background',
     file: 'test-bucket/test-image.png',
 
-    proxyParams: new ImgProxyParamBuilder()
-      .pad(50)
-      .setBackground('ff0000')
-      .build(),
+    proxyParams: pb().pad({ top: 50 }).background('ff0000').build(),
   },
   {
     label: 'Resizing',
     file: 'test-bucket/test-image.png',
     width: 100,
     height: 100,
-    proxyParams: new ImgProxyParamBuilder()
+    proxyParams: pb()
       .resize({
         type: ResizeType.FILL,
         width: 100,
         height: 100,
         enlarge: true,
-        gravity: {
-          type: GravityType.NORTH,
-          center: {
-            x: 10,
-            y: 10,
-          },
-        },
       })
       .build(),
   },
   {
     label: 'Sharpen',
     file: 'test-bucket/test-image.png',
-    proxyParams: new ImgProxyParamBuilder().sharpen({ sigma: 1.5 }).build(),
+    proxyParams: pb().sharpen(1.5).build(),
   },
   {
     label: 'PNG to JPG',
     file: 'test-bucket/test-image.png',
-    proxyParams: new ImgProxyParamBuilder().format('png').build(),
+    proxyParams: pb().format('png').build(),
   },
   {
     label: 'SVG to PNG',
     file: 'test-bucket/test-image.svg',
-    proxyParams: new ImgProxyParamBuilder().format('png').build(),
+    proxyParams: pb().format('png').build(),
   },
 ];
 
@@ -151,7 +137,7 @@ const Home: NextPage = () => {
                 backgroundImage: `url(${buildProxyImagePath(
                   'test-bucket/test-image.png',
                   {
-                    proxyParams: new ImgProxyParamBuilder().blur(10).build(),
+                    proxyParams: pb().blur(10).build(),
                   },
                 )})`,
                 backgroundSize: 'cover',
