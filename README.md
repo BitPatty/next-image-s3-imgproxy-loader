@@ -2,10 +2,6 @@
 
 This library is a layer on top of the the [next/image](https://nextjs.org/docs/api-reference/next/image) component, which allows you to load images from an [imgproxy](https://github.com/imgproxy/imgproxy) instance connected to an s3.
 
-## Requirements
-
-This package requires **NodeJS version 15.7.0 or later**, due to the base64url encoding used to sign URLs which isn't available in earlier versions.
-
 ## Sample Usage
 
 > You can find additional examples in the [demo project](https://github.com/BitPatty/next-image-s3-imgproxy-loader/blob/master/example/pages/index.tsx).
