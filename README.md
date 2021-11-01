@@ -2,7 +2,7 @@
 
 This library is a layer on top of the the [next/image](https://nextjs.org/docs/api-reference/next/image) component, which allows you to load images from an [imgproxy](https://github.com/imgproxy/imgproxy) instance connected to an S3. With this library, the NextJS server acts as a middleman between the client and the imgproxy instance to perform additional tasks, such as applying signatures and/or guards before loading an image.
 
-> **If you want to access the imgproxy instance directly from your client you can simply use the `next/image` component itself - no need to install this library** (you might wanna look into the [imgproxy-url-builder](https://github.com/BitPatty/next-image-s3-imgproxy-loader) to build the request URL however).
+> **If you want to access the imgproxy instance directly from your client you can simply use the `next/image` component itself - no need to install this library** (you might wanna look into the [imgproxy-url-builder](https://github.com/BitPatty/imgproxy-url-builder) to build the request URL however).
 
 ![Request Flow](https://github.com/BitPatty/next-image-s3-imgproxy-loader/raw/master/request_flow.png)
 
