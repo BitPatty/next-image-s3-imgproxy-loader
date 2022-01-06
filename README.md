@@ -34,7 +34,7 @@ app.prepare().then(() => {
     if (pathname === imgProxy.IMGPROXY_ENDPOINT) {
       // Add other middleware here, such as auth guards
       // ...
-      imgProxy.imageOptimizer(
+      imgProxy.handle(
         new URL('<url to your imgproxy instance>'),
         query,
         res,
