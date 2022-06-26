@@ -20,7 +20,9 @@ npm install --save @bitpatty/next-image-s3-imgproxy-loader
 
 ### Registering the endpoint
 
-The library proxies request through a next endpoint. To register the endpoint create a [custom server](https://nextjs.org/docs/advanced-features/custom-server) in your project and add the following lines:
+#### Method 1: Custom Server
+
+The library by default proxies request through a custom endpoint. To register the endpoint create a [custom server](https://nextjs.org/docs/advanced-features/custom-server) in your project and add the following lines:
 
 ```js
 // server.js
@@ -68,6 +70,38 @@ app.prepare().then(() => {
   });
 });
 ```
+
+#### Method 2: API Endpoint
+
+For serverless environments you can use an API endpoint instead of a custom endpoint.
+
+The setup is similar, register your endpoint as follows:
+
+```typescript
+// pages/api/image.ts
+import { NextApiRequest, NextApiResponse } from 'next';
+import { handle } from '@bitpatty/next-image-s3-imgproxy-loader';
+
+const handler = (req: NextApiRequest, res: NextApiResponse): void => {
+  if (req.method !== 'GET') {
+    res.statusCode = 405;
+    res.send('');
+    return;
+  }
+
+  handle(new URL('http://localhost:4000/'), req.query, res, {
+    signature: {
+      key: '91bdcda48ce22cd7d8d3a0eda930b3db1762bc1cba5dc13542e723b68fe55d6f9d18199cbe35191a45faf22593405cad0fe76ffec67d24f8aee861ac8fe44d96',
+      salt: '72456c286761260f320391fe500fcec53755958dabd288867a6db072e1bc1dbd84b15079838a83a715edc1ecad50c3ce91dd8fdef6f981816fa274f91d8ecf06',
+    },
+    bucketWhitelist: ['test-bucket'],
+  });
+};
+
+export default handler;
+```
+
+With this method, you have to [supply the endpoint](#overriding-the-endpoint) to the `<ProxyImage>` component.
 
 ## Using the component
 
@@ -122,17 +156,7 @@ const imagePath = buildProxyImagePath('test-bucket/test-image.png', {
 
 ## Overriding the endpoint
 
-You can override the default endpoint address or use an absolute address in the component instead.
-
-```js
-// server.js
-createServer((req, res) => {
-  // ...
-  if (pathname === '/my-endpoint') {
-    // ...
-  }
-}
-```
+If you use a different endpoint than the one provided by `IMGPROXY_ENDPOINT` you can override the endpoint used by the component by providing the `endpoint` property. `endpoint` can be both a path but also a URL.
 
 ```tsx
 <ProxyImage file="mybucket/myfile.png" endpoint="/my-endpoint" />;
