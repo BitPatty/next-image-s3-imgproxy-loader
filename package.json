@@ -1,6 +1,6 @@
 {
   "name": "@bitpatty/next-image-s3-imgproxy-loader",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "imgproxy S3 extension for next/image",
   "author": "Matteias Collet <matteias.collet@bluewin.ch>",
   "main": "dist/index.js",
@@ -21,6 +21,7 @@
   "types": "./dist/index.d.ts",
   "homepage": "https://github.com/BitPatty/next-image-s3-imgproxy-loader#readme",
   "devDependencies": {
+    "@types/node": "16.11.7",
     "@types/react": "18.0.9",
     "create-hmac": "1.1.7",
     "next": "12.1.6",
@@ -35,6 +36,6 @@
     "next": "^11.0.0 || ^12.0.0"
   },
   "dependencies": {
-    "@bitpatty/imgproxy-url-builder": "^0.4.1"
+    "@bitpatty/imgproxy-url-builder": "^0.6.0"
   }
 }

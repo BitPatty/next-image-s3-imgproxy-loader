@@ -32,8 +32,8 @@ const demoContent: {
 
     proxyParams: pb()
       .crop({
-        width: 30,
-        height: 30,
+        width: 100,
+        height: 100,
       })
       .build(),
   },
@@ -43,8 +43,8 @@ const demoContent: {
 
     proxyParams: pb()
       .crop({
-        width: 30,
-        height: 30,
+        width: 200,
+        height: 200,
         gravity: {
           type: GravityType.NORTHEAST,
           offset: {
