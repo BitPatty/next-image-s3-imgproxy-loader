@@ -18,6 +18,7 @@ const FORWARDED_HEADERS = [
   'content-length',
   'cache-control',
   'content-disposition',
+  'content-dpr',
 ];
 
 /**
