@@ -24,7 +24,7 @@
     "@types/node": "16.11.7",
     "@types/react": "18.0.14",
     "create-hmac": "1.1.7",
-    "next": "12.2.0",
+    "next": "12.2.1",
     "prettier": "2.7.1",
     "rimraf": "3.0.2",
     "rollup": "2.76.0",
