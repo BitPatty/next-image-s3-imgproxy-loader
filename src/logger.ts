@@ -6,7 +6,7 @@ enum LOG_LEVEL {
 
 type LoggerOptions = {
   logger?: Pick<typeof console, 'debug' | 'warn' | 'error'>;
-  level?: keyof LOG_LEVEL;
+  level?: keyof typeof LOG_LEVEL;
 };
 
 type LogFunc = (
