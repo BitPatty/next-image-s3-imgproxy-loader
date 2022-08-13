@@ -131,7 +131,7 @@ const handle = (
         if (r.headers[h]) {
           Logger.debug(options?.logging, 'Forwarding header', {
             requestPath,
-            hheader: h,
+            header: h,
           });
           res.setHeader(h, r.headers[h] as string);
         }
