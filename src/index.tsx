@@ -7,10 +7,21 @@ import { ServerResponse, request as httpRequest } from 'http';
 
 import pb from '@bitpatty/imgproxy-url-builder';
 
+import Logger, { LoggerOptions } from './logger';
+
+type HandlerOptions = {
+  signature?: {
+    key: string;
+    salt: string;
+  };
+  authToken?: string;
+  bucketWhitelist?: string[];
+  forwardedHeaders?: string[];
+  logging?: LoggerOptions;
+};
+
 const IMGPROXY_ENDPOINT = '/_next/imgproxy';
-
 const SRC_REGEX = /^[^/.]+\/.+[^/]$/;
-
 const FORWARDED_HEADERS = [
   'date',
   'expires',
@@ -22,8 +33,7 @@ const FORWARDED_HEADERS = [
 ];
 
 /**
- * Builds the final reuest path to retrieve
- * an image from the imgproxy instance
+ * Builds the final reuest path to retrieve an image from the imgproxy instance
  *
  * @param src      The source file
  * @param options  The imgproxy options
@@ -53,16 +63,6 @@ const buildRequestPath = (
   });
 };
 
-type ImageOptimizerOptions = {
-  signature?: {
-    key: string;
-    salt: string;
-  };
-  authToken?: string;
-  bucketWhitelist?: string[];
-  forwardedHeaders?: string[];
-};
-
 /**
  * Handles an image request
  *
@@ -75,22 +75,31 @@ const handle = (
   imgproxyBaseUrl: URL,
   query: ParsedUrlQuery,
   res: ServerResponse,
-  options?: ImageOptimizerOptions,
+  options?: HandlerOptions,
 ): void => {
   const { src, params } = query;
+  Logger.debug(options?.logging, 'Processing query', { src, params });
+
   const { authToken, bucketWhitelist, forwardedHeaders, signature } =
     options ?? {};
 
-  // If the source is not set of fails the
-  // regex check throw a 400
+  // If the source is not set of fails the regex check throw a 400
   if (!src || Array.isArray(src) || !SRC_REGEX.test(src)) {
+    Logger.error(options?.logging, 'Source failed validation check', src);
     res.statusCode = 400;
     res.end();
     return;
   }
 
-  // If the bucket whitelist is set throw a 400
-  if (bucketWhitelist && !bucketWhitelist.includes(src.split('/')[0])) {
+  // If the bucket whitelist is set throw a 400 in case the bucket is
+  // not included
+  const bucketName = src.split('/')[0];
+  if (bucketWhitelist && !bucketWhitelist.includes(bucketName)) {
+    Logger.error(
+      options?.logging,
+      'Requested bucket is not whitelisted',
+      bucketName,
+    );
     res.statusCode = 400;
     res.end();
     return;
@@ -101,11 +110,13 @@ const handle = (
     signature,
   });
 
-  const reqMethod = imgproxyBaseUrl.protocol.startsWith('https')
+  Logger.debug(options?.logging, 'Built imgproxy URL', requestPath);
+
+  const reqProto = imgproxyBaseUrl.protocol.startsWith('https')
     ? httpsRequest
     : httpRequest;
 
-  const req = reqMethod(
+  const req = reqProto(
     {
       hostname: imgproxyBaseUrl.hostname,
       ...(imgproxyBaseUrl.port ? { port: imgproxyBaseUrl.port } : {}),
@@ -117,18 +128,33 @@ const handle = (
     },
     (r) => {
       (forwardedHeaders ?? FORWARDED_HEADERS).forEach((h) => {
-        if (r.headers[h]) res.setHeader(h, r.headers[h] as string);
+        if (r.headers[h]) {
+          Logger.debug(options?.logging, 'Forwarding header', {
+            requestPath,
+            hheader: h,
+          });
+          res.setHeader(h, r.headers[h] as string);
+        }
       });
 
-      if (r.statusCode) res.statusCode = r.statusCode;
+      if (r.statusCode) {
+        Logger.debug(options?.logging, 'Received status code', {
+          requestPath,
+          statusCode: r.statusCode,
+        });
+        res.statusCode = r.statusCode;
+      }
 
       r.pipe(res);
-      r.on('end', () => res.end());
+      r.on('end', () => {
+        Logger.debug(options?.logging, 'Stream ended', { requestPath });
+        res.end();
+      });
     },
   );
 
   req.on('error', (e) => {
-    console.error(e);
+    Logger.error(options?.logging, 'Stream error', { requestPath, error: e });
     res.statusCode = 500;
     res.end();
     req.destroy();
