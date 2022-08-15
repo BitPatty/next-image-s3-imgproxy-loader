@@ -59,6 +59,13 @@ app.prepare().then(() => {
           // (Optional) A list of imgproxy headers that should be
           // forwarded through the imgproxy endpoint
           forwardedHeaders: ['<my-header>'],
+          logging: {
+            // (Optional) The logger to use (defaults to console)
+            logger: console,
+            // The log level, must be one of
+            // 'debug', 'warn' or 'error'
+            level: 'debug'
+          }
         },
       );
     } else {
