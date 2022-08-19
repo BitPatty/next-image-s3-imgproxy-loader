@@ -38,6 +38,6 @@
     "next": "^11.0.0 || ^12.0.0"
   },
   "dependencies": {
-    "@bitpatty/imgproxy-url-builder": "^0.7.1"
+    "@bitpatty/imgproxy-url-builder": "^1.0.0"
   }
 }
