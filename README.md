@@ -175,3 +175,21 @@ buildProxyImagePath('test-bucket/test-image.png', {
   endpoint: '/my-endpoint',
 });
 ```
+
+## Forwarded Headers
+
+By default, the following imgproxy headers will be forwarded in the response to the client:
+
+```json
+[
+  "date",
+  "expires",
+  "content-type",
+  "content-length",
+  "cache-control",
+  "content-disposition",
+  "content-dpr"
+]
+```
+
+If you want to forward a different set of headers you can use the `forwardedHeaders` option to specify a custom list of headers. Note that if `forwardedHeaders` is specified, all headers not specified in the list will be omitted in the response.
