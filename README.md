@@ -59,6 +59,12 @@ app.prepare().then(() => {
           // (Optional) A list of imgproxy headers that should be
           // forwarded through the imgproxy endpoint
           forwardedHeaders: ['<my-header>'],
+          // (Optional) An object containing additional request
+          // headers that should be sent to the imgproxy endpoint
+          requestHeaders: {
+            'My-Header': 'My-Value'
+            // ...
+          }
           logging: {
             // (Optional) The logger to use (defaults to console)
             logger: console,
