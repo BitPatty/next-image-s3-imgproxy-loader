@@ -65,8 +65,12 @@ app.prepare().then(() => {
             'My-Header': 'My-Value'
             // ...
           }
+          // (Optional) The logger configuration. If you want additional
+          // debug output you can adjust the log level.
           logging: {
             // (Optional) The logger to use (defaults to console)
+            // The logger should implement the signature for
+            // for console.debug, console.warn and console.error
             logger: console,
             // (Optional) The log level, must be one of
             // 'debug', 'warn' or 'error' (defaults to 'error')
