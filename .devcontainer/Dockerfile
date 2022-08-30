@@ -6,11 +6,10 @@ FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
 # On how to use docker from within docker
 
 # Install Docker CE CLI
-ARG BUILDARCH
 RUN apt-get update \
   && apt-get install -y apt-transport-https ca-certificates curl gnupg2 lsb-release \
   && curl -fsSL https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]')/gpg | apt-key add - 2>/dev/null \
-  && echo "deb [arch=$BUILDARCH] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list \
+  && echo "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list \
   && apt-get update \
   && apt-get install -y docker-ce-cli
 
@@ -31,6 +30,6 @@ RUN usermod -a -G docker node
 
 # Add minio CLI
 # See https://min.io/download#/linux
-RUN wget https://dl.min.io/client/mc/release/linux-$BUILDARCH/mc \
+RUN wget https://dl.min.io/client/mc/release/linux-$(dpkg --print-architecture)/mc \
   && mv mc /usr/local/bin/minio-cli \
   && chmod +x /usr/local/bin/minio-cli
