@@ -13,20 +13,69 @@ import pb from '@bitpatty/imgproxy-url-builder';
 
 import Logger, { LoggerOptions } from './logger';
 
+/**
+ * The options for the request handler
+ */
 type HandlerOptions = {
+  /**
+   * The secrets for signing the URLs
+   */
   signature?: {
+    /**
+     * The hex-encoded imgproxy key (IMGPROXY_KEY)
+     */
     key: string;
+
+    /**
+     * The hex-encoded imgproxy salt (IMGPROXY_SALT)
+     */
     salt: string;
   };
+
+  /**
+   * The auth token (IMGPROXY_SECRET), will be included in the Authorization request
+   * header as bearer token
+   */
   authToken?: string;
+
+  /**
+   * Restrict access to the specified buckets
+   */
   bucketWhitelist?: string[];
+
+  /**
+   * The imgproxy headers that should be forwarded to the client. Overrides the default
+   * set of response headers.
+   *
+   * If specified, all headers not included in this configuration will be stripped
+   * from the response.
+   */
   forwardedHeaders?: string[];
+
+  /**
+   * Additional request headers that should be sent to imgproxy
+   */
   requestHeaders?: OutgoingHttpHeaders;
+
+  /**
+   * The logger configuration
+   */
   logging?: LoggerOptions;
 };
 
+/**
+ * The default NextJS endpoint that should be used for proxying the images
+ */
 const IMGPROXY_ENDPOINT = '/_next/imgproxy';
+
+/**
+ * The regex for validating whether a source string is valid (<bucket name>/<file name>)
+ */
 const SRC_REGEX = /^[^/.]+\/.+[^/]$/;
+
+/**
+ * The default imgproxy response headers that should be forwarded to the client.
+ */
 const FORWARDED_HEADERS = [
   'date',
   'expires',
@@ -175,9 +224,23 @@ const handle = (
   req.end();
 };
 
+/**
+ * The props for the <ProxyImage /> component
+ */
 type ProxyImageProps = {
+  /**
+   * The file path in the format `<bucket name>/<file-name>`
+   */
   file: string;
+
+  /**
+   * The imgproxy params
+   */
   proxyParams?: string;
+
+  /**
+   * The NextJS endpoint handling the proxy request
+   */
   endpoint?: string;
 };
 
@@ -226,3 +289,4 @@ const ProxyImage = ({
 
 export default ProxyImage;
 export { IMGPROXY_ENDPOINT, buildProxyImagePath, handle };
+export type { HandlerOptions, ProxyImageProps, LoggerOptions };
