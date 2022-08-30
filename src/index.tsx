@@ -6,7 +6,7 @@ import { request as httpsRequest } from 'https';
 import {
   ServerResponse,
   request as httpRequest,
-  IncomingHttpHeaders,
+  OutgoingHttpHeaders,
 } from 'http';
 
 import pb from '@bitpatty/imgproxy-url-builder';
@@ -21,7 +21,7 @@ type HandlerOptions = {
   authToken?: string;
   bucketWhitelist?: string[];
   forwardedHeaders?: string[];
-  requestHeaders?: IncomingHttpHeaders;
+  requestHeaders?: OutgoingHttpHeaders;
   logging?: LoggerOptions;
 };
 
