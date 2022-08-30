@@ -3,11 +3,7 @@ import Image, { ImageLoaderProps, ImageProps } from 'next/image';
 
 import { ParsedUrlQuery } from 'node:querystring';
 import { request as httpsRequest } from 'https';
-import {
-  ServerResponse,
-  request as httpRequest,
-  IncomingHttpHeaders,
-} from 'http';
+import { ServerResponse, request as httpRequest } from 'http';
 
 import pb from '@bitpatty/imgproxy-url-builder';
 
@@ -21,7 +17,6 @@ type HandlerOptions = {
   authToken?: string;
   bucketWhitelist?: string[];
   forwardedHeaders?: string[];
-  requestHeaders?: IncomingHttpHeaders;
   logging?: LoggerOptions;
 };
 
@@ -85,13 +80,8 @@ const handle = (
   const { src, params } = query;
   Logger.debug(options?.logging, 'Processing query', { src, params });
 
-  const {
-    authToken,
-    bucketWhitelist,
-    requestHeaders,
-    forwardedHeaders,
-    signature,
-  } = options ?? {};
+  const { authToken, bucketWhitelist, forwardedHeaders, signature } =
+    options ?? {};
 
   // If the source is not set of fails the regex check throw a 400
   if (!src || Array.isArray(src) || !SRC_REGEX.test(src)) {
@@ -133,9 +123,7 @@ const handle = (
       path: requestPath,
       method: 'GET',
       headers: {
-        ...(authToken
-          ? { Authorization: `Bearer ${authToken}`, ...requestHeaders }
-          : requestHeaders),
+        ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
       },
     },
     (r) => {
