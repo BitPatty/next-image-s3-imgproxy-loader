@@ -142,7 +142,7 @@ const handle = (
     signature,
   } = options ?? {};
 
-  // If the source is not set of fails the regex check throw a 400
+  // If the source is not set or fails the regex check throw a 400
   if (!src || Array.isArray(src) || !SRC_REGEX.test(src)) {
     Logger.error(options?.logging, 'Source failed validation check', src);
     res.statusCode = 400;
