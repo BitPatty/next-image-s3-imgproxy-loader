@@ -87,7 +87,7 @@ const FORWARDED_HEADERS = [
 ];
 
 /**
- * Builds the final reuest path to retrieve an image from the imgproxy instance
+ * Builds the final request path to retrieve an image from the imgproxy instance
  *
  * @param src      The source file
  * @param options  The imgproxy options
