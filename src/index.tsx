@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Image, { ImageLoaderProps, ImageProps } from 'next/image';
+import Image, { ImageLoaderProps, ImageProps } from 'next/image.js';
 
 import { ParsedUrlQuery } from 'node:querystring';
 import { request as httpsRequest } from 'https';
@@ -11,7 +11,7 @@ import {
 
 import pb from '@bitpatty/imgproxy-url-builder';
 
-import Logger, { LoggerOptions } from './logger';
+import Logger, { LoggerOptions } from './logger.js';
 
 /**
  * The options for the request handler

@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "module": "esnext",
-    "target": "es6",
+    "module": "ES2020",
+    "target": "ES2022",
+    "moduleResolution": "NodeNext",
     "lib": [
       "es6",
       "dom",
@@ -14,7 +15,6 @@
     "jsx": "react",
     "declaration": true,
     "emitDeclarationOnly": false,
-    "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
