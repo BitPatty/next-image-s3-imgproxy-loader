@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { handle } from '../../../dist';
+import { handle } from '@bitpatty/next-image-s3-imgproxy-loader';
 
 const handler = (req: NextApiRequest, res: NextApiResponse): void => {
   if (req.method !== 'GET') {

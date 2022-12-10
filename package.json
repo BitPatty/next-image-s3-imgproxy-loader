@@ -3,18 +3,7 @@
   "version": "0.10.1",
   "description": "imgproxy S3 extension for next/image",
   "author": "Matteias Collet <matteias.collet@bluewin.ch>",
-  "contributors": [
-    {
-      "name": "Kevin Mahoney",
-      "email": "kevin@icecube.dog",
-      "url": "https://github.com/kevcube"
-    }
-  ],
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "rimraf dist && rollup -c",
-    "deps:force-upgrade": "npm-check-updates -u && rm -rf node_modules && rm -f package-lock.json && npm i"
-  },
+  "homepage": "https://github.com/BitPatty/next-image-s3-imgproxy-loader#readme",
   "repository": {
     "type": "git",
     "url": "https://github.com/BitPatty/next-image-s3-imgproxy-loader.git"
@@ -26,13 +15,24 @@
   "files": [
     "dist"
   ],
+  "contributors": [
+    {
+      "name": "Kevin Mahoney",
+      "email": "kevin@icecube.dog",
+      "url": "https://github.com/kevcube"
+    }
+  ],
+  "main": "dist/index.js",
   "types": "./dist/index.d.ts",
-  "homepage": "https://github.com/BitPatty/next-image-s3-imgproxy-loader#readme",
+  "scripts": {
+    "build": "rimraf dist && rollup -c",
+    "deps:force-upgrade": "npm-check-updates -u && rm -rf node_modules && rm -f package-lock.json && npm i"
+  },
   "devDependencies": {
     "@types/node": "18.7.2",
     "@types/react": "18.0.26",
     "create-hmac": "1.1.7",
-    "next": "12.3.1",
+    "next": "13.0.6",
     "npm-check-updates": "16.5.3",
     "prettier": "2.8.1",
     "rimraf": "3.0.2",
@@ -42,7 +42,7 @@
     "typescript": "4.9.4"
   },
   "peerDependencies": {
-    "next": "^11.0.0 || ^12.0.0"
+    "next": "^11.0.0 || ^12.0.0 || ^13.0.0"
   },
   "dependencies": {
     "@bitpatty/imgproxy-url-builder": "^1.0.0"

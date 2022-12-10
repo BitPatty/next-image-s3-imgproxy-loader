@@ -2,7 +2,9 @@ import pb, { GravityType, ResizeType } from '@bitpatty/imgproxy-url-builder';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
-import ProxyImage, { buildProxyImagePath } from '../../dist';
+import ProxyImage, {
+  buildProxyImagePath,
+} from '@bitpatty/next-image-s3-imgproxy-loader';
 
 const demoContent: {
   label: string;

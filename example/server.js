@@ -7,7 +7,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const imgProxy = require('../dist');
+const imgProxy = require('@bitpatty/next-image-s3-imgproxy-loader');
 
 app.prepare().then(() => {
   createServer((req, res) => {
