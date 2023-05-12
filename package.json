@@ -32,7 +32,7 @@
     "@types/node": "18.15.11",
     "@types/react": "18.2.6",
     "create-hmac": "1.1.7",
-    "next": "13.4.1",
+    "next": "13.4.2",
     "npm-check-updates": "16.10.12",
     "prettier": "2.8.8",
     "rimraf": "5.0.0",
