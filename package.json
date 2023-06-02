@@ -39,7 +39,7 @@
     "rollup": "3.23.0",
     "rollup-plugin-typescript2": "0.34.1",
     "tslib": "2.5.2",
-    "typescript": "5.0.4"
+    "typescript": "5.1.3"
   },
   "peerDependencies": {
     "next": "^11.0.0 || ^12.0.0 || ^13.0.0"
