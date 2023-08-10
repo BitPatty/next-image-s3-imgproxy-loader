@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@types/node": "18.15.11",
-    "@types/react": "18.2.19",
+    "@types/react": "18.2.20",
     "create-hmac": "1.1.7",
     "next": "13.4.13",
     "npm-check-updates": "16.10.18",
