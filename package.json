@@ -34,7 +34,7 @@
     "create-hmac": "1.1.7",
     "next": "13.4.16",
     "npm-check-updates": "16.11.1",
-    "prettier": "2.8.8",
+    "prettier": "3.0.1",
     "rimraf": "5.0.1",
     "rollup": "3.28.0",
     "rollup-plugin-typescript2": "0.35.0",
