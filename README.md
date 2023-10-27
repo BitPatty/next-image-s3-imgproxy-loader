@@ -52,7 +52,7 @@ app.prepare().then(() => {
           },
           // (Optional) If your imgproxy instance uses
           // the IMGPROXY_SECRET, specify the token here
-          authToken: '<my-token>'
+          authToken: '<my-token>',
           // (Optional) If you wanna restrict access to specific
           // buckets add an array of valid bucket names
           bucketWhitelist: ['<my-bucket>'],
@@ -62,9 +62,9 @@ app.prepare().then(() => {
           // (Optional) An object containing additional request
           // headers that should be sent to the imgproxy endpoint
           requestHeaders: {
-            'My-Header': 'My-Value'
+            'My-Header': 'My-Value',
             // ...
-          }
+          },
           // (Optional) The logger configuration. If you want additional
           // debug output you can adjust the log level.
           logging: {
@@ -74,8 +74,8 @@ app.prepare().then(() => {
             logger: console,
             // (Optional) The log level, must be one of
             // 'debug', 'warn' or 'error' (defaults to 'error')
-            level: 'debug'
-          }
+            level: 'debug',
+          },
         },
       );
     } else {
