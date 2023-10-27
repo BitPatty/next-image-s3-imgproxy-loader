@@ -2,7 +2,8 @@ import pb, { GravityType, ResizeType } from '@bitpatty/imgproxy-url-builder';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
-import ProxyImage, {
+import {
+  ProxyImage,
   buildProxyImagePath,
 } from '@bitpatty/next-image-s3-imgproxy-loader';
 
@@ -115,7 +116,6 @@ const Home: NextPage = () => {
       <Head>
         <title>Create Next App</title>
       </Head>
-
       <main>
         <h1>next/image s3 imgproxy loader </h1>
         <div>
@@ -123,12 +123,11 @@ const Home: NextPage = () => {
             <div key={idx}>
               <h2>{d.label}</h2>
               <div className="imgcontainer">
-                <ProxyImage alt="stub" {...d} />
+                <ProxyImage alt="stub" {...d} />;
               </div>
             </div>
           ))}
         </div>
-
         <div>
           <div>
             <h2>Background Image</h2>
@@ -136,9 +135,7 @@ const Home: NextPage = () => {
               style={{
                 backgroundImage: `url(${buildProxyImagePath(
                   'test-bucket/test-image.png',
-                  {
-                    proxyParams: pb().blur(10).build(),
-                  },
+                  { proxyParams: pb().blur(10).build() },
                 )})`,
                 backgroundSize: 'cover',
                 color: 'white',

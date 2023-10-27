@@ -9,7 +9,7 @@ import {
   OutgoingHttpHeaders,
 } from 'http';
 
-import pb from '@bitpatty/imgproxy-url-builder';
+import { ParamBuilder } from '@bitpatty/imgproxy-url-builder';
 
 import Logger, { LoggerOptions } from './logger';
 
@@ -105,7 +105,7 @@ const buildRequestPath = (
 ): string => {
   const { imgproxyParams, signature } = options ?? {};
 
-  const paramBuilder = pb();
+  const paramBuilder = new ParamBuilder();
   if (imgproxyParams && imgproxyParams.includes(':')) {
     // @ts-ignore
     paramBuilder.modifiers.set('params', imgproxyParams);
@@ -281,12 +281,11 @@ const ProxyImage = ({
     <Image
       src={file}
       loader={imageLoader}
-      {...(props.width == null && !props.layout ? { layout: 'fill' } : {})}
+      {...(props.width == null && !props.fill ? { fill: true } : {})}
       {...props}
     />
   );
 };
 
-export default ProxyImage;
-export { IMGPROXY_ENDPOINT, buildProxyImagePath, handle };
+export { ProxyImage, IMGPROXY_ENDPOINT, buildProxyImagePath, handle };
 export type { HandlerOptions, ProxyImageProps, LoggerOptions };

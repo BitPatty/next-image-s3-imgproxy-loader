@@ -21,9 +21,6 @@ app.prepare().then(() => {
           salt: '72456c286761260f320391fe500fcec53755958dabd288867a6db072e1bc1dbd84b15079838a83a715edc1ecad50c3ce91dd8fdef6f981816fa274f91d8ecf06',
         },
         bucketWhitelist: ['test-bucket'],
-        logging: {
-          level: 'debug',
-        },
       });
     } else {
       handle(req, res, parsedUrl);
