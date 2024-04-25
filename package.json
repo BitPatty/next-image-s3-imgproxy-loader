@@ -40,7 +40,7 @@
     "@types/node": "20.8.9",
     "@types/react": "18.2.79",
     "create-hmac": "1.1.7",
-    "next": "14.2.2",
+    "next": "14.2.3",
     "npm-check-updates": "16.14.18",
     "prettier": "3.2.5",
     "rimraf": "5.0.5",
