@@ -48,7 +48,7 @@
     "rollup-plugin-typescript2": "0.36.0",
     "tslib": "2.6.2",
     "typescript": "5.4.5",
-    "eslint": "8.57.0"
+    "eslint": "9.2.0"
   },
   "peerDependencies": {
     "next": "^13.0.0 || ^14.0.0"
