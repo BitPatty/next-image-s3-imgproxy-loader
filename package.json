@@ -40,15 +40,15 @@
     "@types/node": "20.8.9",
     "@types/react": "18.3.3",
     "create-hmac": "1.1.7",
-    "next": "14.2.4",
+    "next": "14.2.5",
     "npm-check-updates": "16.14.20",
-    "prettier": "3.3.2",
-    "rimraf": "5.0.7",
-    "rollup": "4.18.0",
+    "prettier": "3.3.3",
+    "rimraf": "6.0.1",
+    "rollup": "4.19.0",
     "rollup-plugin-typescript2": "0.36.0",
     "tslib": "2.6.3",
     "typescript": "5.5.3",
-    "eslint": "8.57.0"
+    "eslint": "9.7.0"
   },
   "peerDependencies": {
     "next": "^13.0.0 || ^14.0.0"
