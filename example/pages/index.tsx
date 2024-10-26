@@ -6,6 +6,7 @@ import {
   ProxyImage,
   buildProxyImagePath,
 } from '@bitpatty/next-image-s3-imgproxy-loader';
+import { useEffect, useRef, useState } from 'react';
 
 const demoContent: {
   label: string;
@@ -111,6 +112,18 @@ const demoContent: {
 ];
 
 const Home: NextPage = () => {
+  const [size, setSize] = useState<number>(200);
+  const sizeToggle = useRef<boolean>(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      sizeToggle.current = !sizeToggle.current;
+      setSize(sizeToggle.current ? 200 : 100);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <Head>
@@ -127,6 +140,20 @@ const Home: NextPage = () => {
               </div>
             </div>
           ))}
+        </div>
+        <div>
+          <div>
+            <h2>Dynamic</h2>
+            <div className="imgcontainer">
+              <img
+                src={buildProxyImagePath('test-bucket/test-image.png', {
+                  proxyParams: pb()
+                    .resize({ width: size, height: size })
+                    .build(),
+                })}
+              />
+            </div>
+          </div>
         </div>
         <div>
           <div>

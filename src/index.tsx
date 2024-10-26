@@ -277,14 +277,14 @@ const ProxyImage = ({
     return `${endpoint ?? IMGPROXY_ENDPOINT}?${urlParams.toString()}`;
   };
 
-  return (
-    <Image
-      src={file}
-      loader={imageLoader}
-      {...(props.width == null && !props.fill ? { fill: true } : {})}
-      {...props}
-    />
-  );
+  // Toggle fill on if width is not provided
+  const fillProp = props.fill
+    ? { fill: true }
+    : props.width == null && props.fill == null
+      ? { fill: true }
+      : {};
+
+  return <Image src={file} loader={imageLoader} {...props} {...fillProp} />;
 };
 
 export { ProxyImage, IMGPROXY_ENDPOINT, buildProxyImagePath, handle };
