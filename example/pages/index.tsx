@@ -136,7 +136,7 @@ const Home: NextPage = () => {
             <div key={idx}>
               <h2>{d.label}</h2>
               <div className="imgcontainer">
-                <ProxyImage alt="stub" {...d} />;
+                <ProxyImage alt="stub" {...d} />
               </div>
             </div>
           ))}

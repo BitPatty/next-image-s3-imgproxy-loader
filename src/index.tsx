@@ -284,7 +284,26 @@ const ProxyImage = ({
       ? { fill: true }
       : {};
 
-  return <Image src={file} loader={imageLoader} {...props} {...fillProp} />;
+  // Suppress missing sizes warning if fill is set
+  // as it doesn't matter for this image optimization
+  //
+  // See https://nextjs.org/docs/pages/api-reference/components/image#sizes
+  const sizesProp =
+    props.sizes != null
+      ? { sizes: props.sizes }
+      : fillProp.fill
+        ? { sizes: '100%' }
+        : {};
+
+  return (
+    <Image
+      src={file}
+      loader={imageLoader}
+      {...props}
+      {...fillProp}
+      {...sizesProp}
+    />
+  );
 };
 
 export { ProxyImage, IMGPROXY_ENDPOINT, buildProxyImagePath, handle };
