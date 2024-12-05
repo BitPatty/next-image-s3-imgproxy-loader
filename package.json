@@ -38,14 +38,14 @@
   },
   "devDependencies": {
     "@types/node": "22.8.1",
-    "@types/react": "18.3.12",
+    "@types/react": "18.3.13",
     "next": "15.0.3",
     "npm-check-updates": "17.1.11",
-    "prettier": "3.3.3",
-    "rollup": "4.27.3",
+    "prettier": "3.4.2",
+    "rollup": "4.28.0",
     "rollup-plugin-typescript2": "0.36.0",
     "tslib": "2.8.1",
-    "typescript": "5.6.3"
+    "typescript": "5.7.2"
   },
   "peerDependencies": {
     "next": ">=13.0.0 <16.0.0"
