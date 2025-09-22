@@ -40,9 +40,9 @@
     "@types/node": "22.8.1",
     "@types/react": "19.1.13",
     "next": "15.5.3",
-    "npm-check-updates": "18.2.1",
+    "npm-check-updates": "18.3.0",
     "prettier": "3.6.2",
-    "rollup": "4.51.0",
+    "rollup": "4.52.0",
     "rollup-plugin-typescript2": "0.36.0",
     "tslib": "2.8.1",
     "typescript": "5.9.2"
