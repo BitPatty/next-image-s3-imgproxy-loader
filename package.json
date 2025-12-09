@@ -37,7 +37,7 @@
     "deps:force-upgrade": "npm-check-updates -u && rm -rf node_modules && rm -f package-lock.json && npm i"
   },
   "devDependencies": {
-    "@types/node": "22.8.1",
+    "@types/node": "24.10.2",
     "@types/react": "19.2.7",
     "next": "16.0.8",
     "npm-check-updates": "19.1.2",
@@ -48,7 +48,7 @@
     "typescript": "5.9.3"
   },
   "peerDependencies": {
-    "next": ">=13.0.0 <16.0.0"
+    "next": ">=16.0.0 <17.0.0"
   },
   "dependencies": {
     "@bitpatty/imgproxy-url-builder": "^2.0.0"

@@ -13,7 +13,7 @@
       },
       "extensions": [
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
+        "prettier.prettier-vscode",
         "mikestead.dotenv",
         "ms-azuretools.vscode-docker",
         "ms-vsliveshare.vsliveshare",

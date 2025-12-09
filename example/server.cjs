@@ -1,13 +1,13 @@
 // server.js
-const { createServer } = require('http');
-const { parse } = require('url');
-const next = require('next');
+const { createServer }  = require('http');
+const {parse}  = require('url');
+const imgProxy  = require('@bitpatty/next-image-s3-imgproxy-loader');
+const next  = require('next');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const imgProxy = require('@bitpatty/next-image-s3-imgproxy-loader');
 
 app.prepare().then(() => {
   createServer((req, res) => {

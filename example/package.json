@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "node server.cjs",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.cjs"
   },
   "dependencies": {
     "@bitpatty/next-image-s3-imgproxy-loader": "file:.."
