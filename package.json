@@ -39,7 +39,7 @@
   "devDependencies": {
     "@types/node": "24.10.2",
     "@types/react": "19.2.7",
-    "next": "16.0.10",
+    "next": "16.1.0",
     "npm-check-updates": "19.2.0",
     "prettier": "3.7.4",
     "rollup": "4.53.5",
