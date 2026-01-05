@@ -40,7 +40,7 @@
     "@types/node": "24.10.2",
     "@types/react": "19.2.7",
     "next": "16.1.1",
-    "npm-check-updates": "19.2.0",
+    "npm-check-updates": "19.3.0",
     "prettier": "3.7.4",
     "rollup": "4.54.0",
     "rollup-plugin-typescript2": "0.36.0",
