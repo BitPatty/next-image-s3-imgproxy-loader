@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@types/node": "24.10.2",
-    "@types/react": "19.2.13",
+    "@types/react": "19.2.14",
     "next": "16.1.6",
     "npm-check-updates": "19.3.2",
     "prettier": "3.8.1",
