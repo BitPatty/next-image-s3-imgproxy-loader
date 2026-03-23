@@ -39,10 +39,10 @@
   "devDependencies": {
     "@types/node": "24.10.2",
     "@types/react": "19.2.14",
-    "next": "16.1.6",
-    "npm-check-updates": "19.4.1",
+    "next": "16.2.1",
+    "npm-check-updates": "19.6.5",
     "prettier": "3.8.1",
-    "rollup": "4.59.0",
+    "rollup": "4.60.0",
     "rollup-plugin-typescript2": "0.36.0",
     "tslib": "2.8.1",
     "typescript": "5.9.3"
